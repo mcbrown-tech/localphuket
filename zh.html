@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Local Phuket — 普吉岛生活服务</title>
+<meta name="description" content="货币兑换、摩托车及汽车租赁、房产、签证、驾照、护照、旅游团、机场快速通道。请通过 WhatsApp、Telegram 或微信联系我们。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Jost:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --bg: #FBF6EC;
+    --surface: #FFFFFF;
+    --ink: #0E3B3C;
+    --muted: #5B7777;
+    --line: #E3DBC7;
+
+    --teal: #0B7C7E;
+    --teal-deep: #084F52;
+    --lagoon: #19B3AE;
+    --coral: #FF6B4A;
+    --coral-deep: #E24E2E;
+    --gold: #F3A712;
+    --sun: #FFD23F;
+    --leaf: #2FA96A;
+    --on-dark: #FFFFFF;
+
+    --display: "Baloo 2", "Noto Sans SC", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --body: "Jost", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #06282A;
+      --surface: #0A3638;
+      --ink: #F2EFE3;
+      --muted: #9FC2C0;
+      --line: #124547;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #06282A;
+    --surface: #0A3638;
+    --ink: #F2EFE3;
+    --muted: #9FC2C0;
+    --line: #124547;
+  }
+
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.58;
+    -webkit-text-size-adjust: 100%;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+  /* Pinned top bar */
+  .topbar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: var(--teal-deep);
+    color: #fff;
+  }
+  .topbar-in {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 11px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .brand {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 19px;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #fff;
+  }
+  .brand i { font-style: normal; color: var(--sun); }
+  .pins { display: flex; gap: 8px; }
+  .pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.35);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    min-height: 36px;
+  }
+  .pin:hover { background: rgba(255,255,255,.14); }
+  .pin.tg { background: var(--coral); border-color: var(--coral); }
+  .pin.tg:hover { filter: brightness(1.08); background: var(--coral); }
+  svg.ic { width: 18px; height: 18px; flex: none; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(165deg, var(--lagoon) 0%, var(--teal) 46%, var(--teal-deep) 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .sunburst {
+    position: absolute;
+    right: -70px;
+    top: -70px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--sun) 0%, rgba(255,210,63,0) 70%);
+    opacity: .9;
+  }
+  .beach {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    width: 460px;
+    max-width: 62%;
+    height: auto;
+    pointer-events: none;
+  }
+  .hero-in {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 60px 20px 54px;
+    position: relative;
+    z-index: 1;
+  }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 7px 14px 7px 10px;
+    background: rgba(255,255,255,.16);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(34px, 6.6vw, 60px);
+    line-height: 1.06;
+    letter-spacing: -.01em;
+    margin: 0 0 20px;
+    max-width: 13em;
+    text-shadow: 0 2px 0 rgba(0,0,0,.08);
+  }
+  .hero h1 span { color: var(--sun); }
+  .hero p.sub { margin: 0 0 30px; max-width: 32em; color: #E7FBF8; font-size: 18px; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .wave {
+    position: relative;
+    left: 0; right: 0; bottom: -1px;
+    height: 54px;
+    width: 100%;
+    display: block;
+  }
+  .wave path { fill: var(--bg); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 14px 22px;
+    border-radius: 14px;
+    font: 600 16px/1 var(--body);
+    text-decoration: none;
+    color: var(--on-dark);
+    min-height: 48px;
+    border: 0;
+    box-shadow: 0 3px 0 rgba(0,0,0,.14);
+  }
+  .btn.wa { background: var(--coral); }
+  .btn.tg { background: var(--gold); color: #3A2200; }
+  .btn.wc { background: #07C160; cursor: pointer; }
+  .wc-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: #0E3B3C; color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 15px; z-index: 99; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .wc-toast.show { opacity: 1; }
+  .btn:hover { filter: brightness(1.06); }
+  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.14); }
+  .btn.sm { padding: 11px 16px; min-height: 42px; font-size: 14.5px; border-radius: 11px; box-shadow: 0 2px 0 rgba(0,0,0,.14); }
+
+  /* Services */
+  main { max-width: 1040px; margin: 0 auto; padding: 8px 20px 24px; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(25px, 4vw, 34px);
+    line-height: 1.15;
+    margin: 42px 0 8px;
+    color: var(--teal-deep);
+  }
+  .section-sub { margin: 0 0 22px; color: var(--muted); max-width: 36em; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card .em {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 24px;
+    background: var(--chip, var(--lagoon));
+  }
+  .card h3 { margin: 2px 0 0; font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; flex: 1; }
+  .card .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+
+  /* Other questions / promo blocks */
+  .other {
+    margin: 48px 0 0;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);
+    color: #fff;
+    border-radius: 24px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .other h2 { margin: 0 0 10px; color: #fff; }
+  .other p { margin: 0 0 24px; color: #E7FBF8; max-width: 34em; }
+
+  footer {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
+    color: var(--muted);
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: space-between;
+  }
+  footer a { text-decoration: none; border-bottom: 2px solid var(--coral); color: var(--ink); }
+  footer a:hover { color: var(--coral); }
+
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .hero-in { padding: 44px 20px 44px; }
+    .beach { width: 230px; max-width: 56%; }
+    .grid { grid-template-columns: 1fr; }
+    .other { padding: 28px 20px; border-radius: 20px; }
+    .other .btn { flex: 1 1 100%; }
+    .hero-cta .btn { flex: 1 1 100%; }
+  }
+  @media (max-width: 400px) {
+    .pin span { display: none; }
+    .pin { padding: 9px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Local <i>Phuket</i></a>
+    <nav class="pins" aria-label="我们的社交媒体">
+      <a class="pin tg" id="pinTg" href="#" target="_blank" rel="noopener" aria-label="Telegram 频道">
+        <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 3.4 2.9 10.6c-1 .4-1 1.1-.2 1.3l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.2-.4-1.7-1.4-1.4ZM9.3 13.1l9.1-5.7c.4-.3.8-.1.5.2l-7.5 6.8-.3 3.1-1.8-4.4Z"/></svg>
+        <span>Telegram</span>
+      </a>
+      <a class="pin" id="pinIg" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a class="pin" href="index.html" aria-label="语言">🌐<span>&nbsp;语言</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="beach" viewBox="0 0 460 230" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+    <circle cx="380" cy="46" r="40" fill="var(--sun)" opacity=".18"/>
+    <circle cx="380" cy="46" r="26" fill="var(--sun)"/>
+    <g stroke="#fff" stroke-opacity=".22" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M30 96 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0"/>
+      <path d="M150 126 q20 -10 40 0 t40 0 t40 0"/>
+    </g>
+    <path d="M0 230 L0 172 Q60 152 130 170 T280 162 Q360 152 460 174 L460 230 Z" fill="#F6DFA6"/>
+    <path d="M0 172 Q60 152 130 170 T280 162 Q360 152 460 174" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/>
+    <g>
+      <path d="M400 230 C 398 192 392 162 412 130" fill="none" stroke="#6B4226" stroke-width="9" stroke-linecap="round"/>
+      <g fill="#1F7A52">
+        <path d="M412 130 C 406 110 390 98 364 96 C 390 102 402 114 410 130 Z"/>
+        <path d="M412 130 C 422 108 442 98 464 102 C 440 104 424 114 414 130 Z"/>
+        <path d="M412 130 C 410 106 418 86 436 72 C 422 88 416 106 412 130 Z"/>
+        <path d="M412 130 C 400 110 382 102 362 110 C 384 110 400 118 410 130 Z"/>
+        <path d="M412 130 C 416 104 432 88 454 84 C 434 92 420 106 412 130 Z"/>
+      </g>
+    </g>
+    <g transform="translate(-70,26) scale(.68)">
+      <path d="M400 230 C 398 192 392 162 412 130" fill="none" stroke="#6B4226" stroke-width="9" stroke-linecap="round"/>
+      <g fill="#2FA96A">
+        <path d="M412 130 C 406 110 390 98 364 96 C 390 102 402 114 410 130 Z"/>
+        <path d="M412 130 C 422 108 442 98 464 102 C 440 104 424 114 414 130 Z"/>
+        <path d="M412 130 C 410 106 418 86 436 72 C 422 88 416 106 412 130 Z"/>
+        <path d="M412 130 C 400 110 382 102 362 110 C 384 110 400 118 410 130 Z"/>
+        <path d="M412 130 C 416 104 432 88 454 84 C 434 92 420 106 412 130 Z"/>
+      </g>
+    </g>
+  </svg>
+  <div class="hero-in">
+    <span class="kicker">🌴 普吉岛在线服务</span>
+    <h1>普吉岛生活所需 <span>一站式解决</span></h1>
+    <p class="sub">货币兑换、交通出行、住房、签证、驾照及各类证件办理 — 可靠的服务和全方位的帮助。请通过 WhatsApp、Telegram 或微信联系我们。</p>
+    <div class="hero-cta">
+      <a class="btn wa" data-wa="您好！我从 Local Phuket 网站联系您。" href="#" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.4A8.5 8.5 0 1 1 8 19.3l-4.5 1.2Z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-.8-.4-1.6-1.2-2-2l.8-1-1-2L9 8.5Z" fill="currentColor" stroke="none"/></svg>
+        发送 WhatsApp 消息
+      </a>
+      <a class="btn tg" data-tg="您好！我从 Local Phuket 网站联系您。" href="#" target="_blank" rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 3.4 2.9 10.6c-1 .4-1 1.1-.2 1.3l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.2-.4-1.7-1.4-1.4Z"/></svg>
+        发送 Telegram 消息
+      </a>
+      <a class="btn wc" href="#" data-wc>
+        <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 3C5.4 3 2 5.8 2 9.3c0 2 1.1 3.8 2.9 5L4.2 16.5l2.6-1.3c.8.2 1.7.4 2.7.4h.4a5.6 5.6 0 0 1-.3-1.7c0-3.2 3-5.7 6.6-5.7h.3C16 5 13 3 9.5 3Zm-2.7 4.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm5.4 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8ZM22 14.1c0-2.8-2.7-5-6-5s-6 2.2-6 5 2.7 5 6 5c.7 0 1.4-.1 2-.3l2.1 1.1-.5-1.8c1.5-.9 2.4-2.4 2.4-4Z"/></svg>
+        添加微信
+      </a>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34c100 0 100-20 200-20s100 20 200 20 100-20 200-20 100 20 200 20 100-20 200-20 100 20 200 20v20H0Z"/></svg>
+</section>
+
+<main>
+  <h2>服务项目</h2>
+  <p class="section-sub">选择您需要的服务 — 系统将自动打开聊天窗口并附上消息。</p>
+  <div class="grid" id="services"></div>
+
+  <section class="other" id="other">
+    <h2>其他问题？</h2>
+    <p>如果您需要的服务不在列表中，请通过 WhatsApp、Telegram 或微信联系我们，我们会为您提供帮助。</p>
+    <div class="hero-cta">
+      <a class="btn wa" data-wa="您好！我有其他问题（来自 Local Phuket 网站）。" href="#" target="_blank" rel="noopener">发送 WhatsApp 消息</a>
+      <a class="btn tg" data-tg="您好！我有其他问题（来自 Local Phuket 网站）。" href="#" target="_blank" rel="noopener">发送 Telegram 消息</a>
+  <a class="btn wc" href="#" data-wc>添加微信</a>
+    </div>
+  </section>
+
+  <section class="other" id="video" style="background:linear-gradient(135deg, var(--coral) 0%, var(--coral-deep) 100%); margin-top:24px;">
+    <h2 style="color:#fff;">视频介绍</h2>
+    <p>普吉岛地点与服务的视频介绍，以及面向企业的网络营销。</p>
+    <div class="hero-cta">
+      <a class="btn tg" data-wa="您好！我想洽谈合作（来自 Local Phuket 网站）。" href="#" target="_blank" rel="noopener">合作洽谈：点击联系</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>CODE 13 · @wwwcode13 · <a id="ftWc" href="#" data-wc></a></span>
+  <span><a id="ftTg" href="#" target="_blank" rel="noopener">Telegram 频道</a>&nbsp;&nbsp;<a id="ftChat" href="#" target="_blank" rel="noopener">Telegram 群组</a>&nbsp;&nbsp;<a id="ftIg" href="#" target="_blank" rel="noopener">Instagram</a></span>
+</footer>
+
+<script>
+  // ====== НАСТРОЙКИ — поменяйте здесь ======
+  var WA_NUMBER   = "66656052791";   // WhatsApp: номер без + и пробелов
+  var TG_CHANNEL  = "Wwwphuket";     // Telegram-канал (кнопка вверху и внизу)
+  var TG_CHAT     = "WWWSABAI";      // Telegram-чат (внизу сайта)
+  var TG_CONTACT  = "Local_phuket999";      // Telegram для личных сообщений (username без @)
+  var WC_ID       = "wxid_ipvl4mjw0d6z12";   // WeChat ID
+  var WC_URL      = "https://u.wechat.com/kMgAQb7O8eX5iisjm0SnCAE?s=2";   // WeChat: ссылка из QR-кода
+  var IG_HANDLE   = "wwwphuket";     // Instagram
+  // =========================================
+
+  var COLORS = ["#19B3AE", "#FF6B4A", "#F3A712", "#2FA96A", "#0B7C7E", "#FF6B4A", "#F3A712", "#19B3AE", "#2FA96A"];
+
+  var SERVICES = [
+    { e: "💱", t: "货币兑换",       d: "实时汇率与可靠的兑换点 — 为您推荐今日最优选择。" },
+    { e: "🛵", t: "摩托车租赁",     d: "可按天、周或月租赁，根据您的经验和预算推荐车型。" },
+    { e: "🚗", t: "汽车租赁",       d: "可按天、周或月租赁，根据您的行程推荐车型。" },
+    { e: "🏠", t: "房产服务",       d: "别墅、公寓、condo 的租赁与购买。" },
+    { e: "🪪", t: "签证服务",       d: "旅游签证、延期、长期签证 — 为您推荐合适的方案。" },
+    { e: "🚘", t: "驾照办理",       d: "泰国摩托车及汽车驾照，协助完成全部手续。" },
+    { e: "📘", t: "护照服务",       d: "协助在普吉岛办理及延期护照。" },
+    { e: "🗺️", t: "旅游团",         d: "普吉岛及周边岛屿的团体与私人旅游。" },
+    { e: "🛫", t: "机场快速通道",   d: "机场安检快速通行，无需排队等候。" },
+    { e: "⚖️", t: "法律服务",       d: "普吉岛法律事务咨询与文件办理协助。" },
+    { e: "👑", t: "VIP全程陪同",    d: "整个行程期间的专属顾问，快速高效解决各类问题，无需排队。" },
+    { e: "✈️", t: "私人定制旅行",   d: "全程陪同服务：路线、交通、导游及行程均为您量身定制。" }
+  ];
+
+  function wa(text){ return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text); }
+  function tg(text){ return "https://t.me/" + TG_CONTACT + "?text=" + encodeURIComponent(text); }
+
+  var WA_ICON = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.4A8.5 8.5 0 1 1 8 19.3l-4.5 1.2Z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-.8-.4-1.6-1.2-2-2l.8-1-1-2L9 8.5Z" fill="currentColor" stroke="none"/></svg>';
+  var WC_ICON = '<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 3C5.4 3 2 5.8 2 9.3c0 2 1.1 3.8 2.9 5L4.2 16.5l2.6-1.3c.8.2 1.7.4 2.7.4h.4a5.6 5.6 0 0 1-.3-1.7c0-3.2 3-5.7 6.6-5.7h.3C16 5 13 3 9.5 3Zm-2.7 4.2a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm5.4 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8ZM22 14.1c0-2.8-2.7-5-6-5s-6 2.2-6 5 2.7 5 6 5c.7 0 1.4-.1 2-.3l2.1 1.1-.5-1.8c1.5-.9 2.4-2.4 2.4-4Zm-8-.8a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6Zm4 0a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6Z"/></svg>';
+  var TG_ICON = '<svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 3.4 2.9 10.6c-1 .4-1 1.1-.2 1.3l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.2-.4-1.7-1.4-1.4Z"/></svg>';
+
+  var grid = document.getElementById("services");
+  SERVICES.forEach(function(s, i){
+    var msg = "您好！我对以下服务感兴趣：" + s.t + "（来自 Local Phuket 网站）。";
+    var card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML =
+      '<div class="em" style="--chip:' + COLORS[i % COLORS.length] + '" aria-hidden="true">' + s.e + '</div>' +
+      '<h3>' + s.t + '</h3><p>' + s.d + '</p>' +
+      '<div class="acts">' +
+        '<a class="btn wa sm" target="_blank" rel="noopener" href="' + wa(msg) + '">' + WA_ICON + 'WhatsApp</a>' +
+        '<a class="btn tg sm" target="_blank" rel="noopener" href="' + tg(msg) + '">' + TG_ICON + 'Telegram</a>' +
+        '<a class="btn wc sm" href="#" data-wc target="_blank" rel="noopener">' + WC_ICON + '微信</a>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+
+  document.querySelectorAll("[data-wa]").forEach(function(a){ a.href = wa(a.getAttribute("data-wa")); });
+  document.querySelectorAll("[data-tg]").forEach(function(a){ a.href = tg(a.getAttribute("data-tg")); });
+
+  document.querySelectorAll("[data-wc]").forEach(function(a){ a.href = WC_URL; a.target = "_blank"; a.rel = "noopener"; });
+  document.getElementById("ftWc").textContent = "微信：" + WC_ID;
+
+  var tgUrl = "https://t.me/" + TG_CHANNEL, igUrl = "https://instagram.com/" + IG_HANDLE;
+  document.getElementById("pinTg").href = tgUrl;
+  document.getElementById("ftTg").href = tgUrl;
+  document.getElementById("ftChat").href = "https://t.me/" + TG_CHAT;
+  document.getElementById("pinIg").href = igUrl;
+  document.getElementById("ftIg").href = igUrl;
+</script>
+</body>
+</html>

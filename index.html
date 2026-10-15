@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Local Phuket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg: #FFFFFF;
+    --ink: #0E3B3C;
+    --muted: #5B7777;
+    --line: #E3DBC7;
+    --teal: #0B7C7E;
+    --teal-deep: #084F52;
+    --coral: #FF6B4A;
+    --gold: #F3A712;
+    --display: "Baloo 2", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --body: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #06282A;
+      --ink: #F2EFE3;
+      --muted: #9FC2C0;
+      --line: #124547;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #06282A;
+    --ink: #F2EFE3;
+    --muted: #9FC2C0;
+    --line: #124547;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+  }
+  .wrap {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+    padding: 40px 20px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(30px, 7vw, 46px);
+    letter-spacing: .06em;
+    margin: 0;
+    text-align: center;
+    color: var(--teal-deep);
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) h1 { color: var(--ink); } }
+  :root[data-theme="dark"] h1 { color: var(--ink); }
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border-radius: 14px;
+    border: 2px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .choice:hover { border-color: var(--teal); }
+  .choice.ru { border-color: var(--teal); color: var(--teal-deep); }
+  .choice.zh { border-color: var(--coral); color: var(--coral); }
+  .choice.en { border-color: var(--gold); color: #9A6B06; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .choice.en { color: var(--gold); }
+  }
+  :root[data-theme="dark"] .choice.en { color: var(--gold); }
+  .flag { font-size: 22px; line-height: 1; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>LOCAL PHUKET</h1>
+    <nav class="choices" aria-label="Выбор языка">
+      <a class="choice ru" href="ru.html"><span class="flag">🇷🇺</span> Русский</a>
+      <a class="choice zh" href="zh.html"><span class="flag">🇨🇳</span> 中文</a>
+      <a class="choice en" href="en.html"><span class="flag">🇬🇧</span> English</a>
+    </nav>
+  </div>
+</body>
+</html>
